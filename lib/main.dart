@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:scienceblog/models/my_colors.dart';
+import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/view/main_screen.dart';
-import 'package:scienceblog/view/register_intro.dart';
 
 void main() {
   runApp(const MyApp());

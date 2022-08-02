@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
-import 'package:scienceblog/models/my_strings.dart';
+import 'package:scienceblog/componetnt/my_strings.dart';
 import 'package:scienceblog/view/my_cats.dart';
 import 'package:validators/validators.dart';
-import 'package:validators/sanitizers.dart';
 
 class RegisterIntro extends StatelessWidget {
   const RegisterIntro({Key? key}) : super(key: key);
@@ -143,7 +142,7 @@ class RegisterIntro extends StatelessWidget {
                         onPressed: (() {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: ((context) => MyCats())));
+                                  builder: ((context) => const MyCats())));
                         }),
                         child: const Text("ادامه"))
                   ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
-import 'package:scienceblog/models/my_colors.dart';
+import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/view/profile_Screen.dart';
 import 'home_Screen.dart';
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/models/fake_data.dart';
-import 'package:scienceblog/models/my_colors.dart';
+import 'package:scienceblog/componetnt/my_colors.dart';
 
 class SciDivider extends StatelessWidget {
   const SciDivider({

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:scienceblog/my_Component.dart';
+import 'package:scienceblog/componetnt/my_Component.dart';
 import '../gen/assets.gen.dart';
-import '../models/my_colors.dart';
-import '../models/my_strings.dart';
+import 'package:scienceblog/componetnt/my_colors.dart';
+import 'package:scienceblog/componetnt/my_strings.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({
