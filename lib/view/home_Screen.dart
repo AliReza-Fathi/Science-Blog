@@ -3,6 +3,7 @@ import '../gen/assets.gen.dart';
 import '../models/fake_data.dart';
 import '../models/my_colors.dart';
 import '../models/my_strings.dart';
+import '../my_Component.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -314,34 +315,10 @@ class HomePageTagList extends StatelessWidget {
             return Padding(
               padding: EdgeInsets.fromLTRB(
                   0, 8, index == 0 ? (bodyMargin * 0.25) : 15, 8),
-              child: Container(
-                  height: 60,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                    gradient: LinearGradient(
-                        colors: GradiantColors.tags,
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(16, 8, 8, 8),
-                    child: Row(
-                      children: [
-                        ImageIcon(
-                          AssetImage(Assets.icons.hashtagicon.path),
-                          color: Colors.white,
-                          size: 14,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          tagList[index].title,
-                          style: textTheme.headline2,
-                        )
-                      ],
-                    ),
-                  )),
+              child: MainTags(
+                textTheme: textTheme,
+                index: index,
+              ),
             );
           })),
     );

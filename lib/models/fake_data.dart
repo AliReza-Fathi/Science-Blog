@@ -10,13 +10,26 @@ Map homePagePosterMap = {
 };
 
 List<HashTagModel> tagList = [
-  HashTagModel(title: "دارت"),
-  HashTagModel(title: "جاوا"),
-  HashTagModel(title: "پایتون"),
+  HashTagModel(title: "برنامه نویسی"),
+  HashTagModel(title: "تکنولوژی"),
+  HashTagModel(title: "ارز دیجیتال"),
   HashTagModel(title: "هوش مصنوعی"),
   HashTagModel(title: "بازی های کامپیوتری"),
   HashTagModel(title: "اینترنت اشیاء"),
+  HashTagModel(title: "ورزش"),
+  HashTagModel(title: "سلامت"),
+  HashTagModel(title: "ترفند"),
+  HashTagModel(title: "هنر"),
+  HashTagModel(title: "موسیقی"),
+  HashTagModel(title: "مذهبی"),
+  HashTagModel(title: "تاریخی"),
+  HashTagModel(title: "جغرافیا"),
+  HashTagModel(title: "آشپزی"),
+  HashTagModel(title: "سفر"),
+  HashTagModel(title: "گل و گیاه"),
 ];
+
+List<HashTagModel> selectedTags = [];
 
 List<BlogModel> blogList = [
   BlogModel(

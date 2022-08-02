@@ -29,6 +29,10 @@ class $AssetsIconsGen {
   /// File path: assets/icons/bluepen.png
   AssetGenImage get bluepen => const AssetGenImage('assets/icons/bluepen.png');
 
+  /// File path: assets/icons/downarrow.png
+  AssetGenImage get downarrow =>
+      const AssetGenImage('assets/icons/downarrow.png');
+
   /// File path: assets/icons/hashtagicon.png
   AssetGenImage get hashtagicon =>
       const AssetGenImage('assets/icons/hashtagicon.png');
@@ -49,9 +53,12 @@ class $AssetsImagesGen {
   /// File path: assets/images/Logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
 
-  /// File path: assets/images/Main Screen.png
-  AssetGenImage get mainScreen =>
-      const AssetGenImage('assets/images/Main Screen.png');
+  /// File path: assets/images/Main Screen.svg
+  String get mainScreen => 'assets/images/Main Screen.svg';
+
+  /// File path: assets/images/MainScreenLogo.png
+  AssetGenImage get mainScreenLogo =>
+      const AssetGenImage('assets/images/MainScreenLogo.png');
 
   /// File path: assets/images/avatar.png
   AssetGenImage get avatar => const AssetGenImage('assets/images/avatar.png');
