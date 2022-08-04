@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:scienceblog/componetnt/my_Component.dart';
+import 'package:scienceblog/componetnt/my_strings.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
+import 'package:scienceblog/view/about_Us.dart';
 import 'package:scienceblog/view/profile_Screen.dart';
+import 'package:share_plus/share_plus.dart';
 import 'home_Screen.dart';
-
-class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
-
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
 
-class _MainScreenState extends State<MainScreen> {
-  var selectedPageIndex = 0;
+class MainScreen extends StatelessWidget {
+  RxInt selectedPageIndex = 0.obs;
+
+  MainScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
@@ -71,41 +71,71 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ),
               ListTile(
-                title: Text(
-                  "پروفایل کاربر",
-                  style: textTheme.headline4,
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "پروفایل کاربر",
+                    style: textTheme.headline4,
+                  ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProfileScreen(
+                            size: size,
+                            textTheme: textTheme,
+                            bodyMargin: bodyMargin)),
+                  );
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
               ),
               ListTile(
-                title: Text(
-                  "درباره ساینس بلاگ",
-                  style: textTheme.headline4,
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "درباره ساینس بلاگ",
+                    style: textTheme.headline4,
+                  ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutUs()),
+                  );
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
               ),
               ListTile(
-                title: Text(
-                  "اشتراک گذاری ساینس بلاگ",
-                  style: textTheme.headline4,
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "اشتراک گذاری ساینس بلاگ",
+                    style: textTheme.headline4,
+                  ),
                 ),
-                onTap: () {},
+                onTap: () async {
+                  await Share.share(MyStrings.shareText);
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
               ),
               ListTile(
-                title: Text(
-                  "تماس با ما",
-                  style: textTheme.headline4,
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "ساینس بلاگ در گیت هاب",
+                    style: textTheme.headline4,
+                  ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  myLaunchUrl(MyStrings.scienceBlogGithubUrl);
+                },
               ),
               const Divider(
                 color: SolidColors.dividerColor,
@@ -118,8 +148,9 @@ class _MainScreenState extends State<MainScreen> {
           children: [
             //محتوای صفحه هوم
             Positioned.fill(
-              child: IndexedStack(
-                index: selectedPageIndex,
+                child: Obx(
+              () => IndexedStack(
+                index: selectedPageIndex.value,
                 children: [
                   HomeScreen(
                       size: size, textTheme: textTheme, bodyMargin: bodyMargin),
@@ -127,16 +158,14 @@ class _MainScreenState extends State<MainScreen> {
                       size: size, textTheme: textTheme, bodyMargin: bodyMargin),
                 ],
               ),
-            ),
+            )),
 
             //نویگیتور
             BottemNavigatiotn(
               size: size,
               bodyMargin: bodyMargin,
               changeScreen: (int value) {
-                setState(() {
-                  selectedPageIndex = value;
-                });
+                selectedPageIndex.value = value;
               },
             )
           ],

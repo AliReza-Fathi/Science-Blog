@@ -1,6 +1,6 @@
 class MyStrings {
-  static const String techBlogGithubUrl =
-      "https://github.com/sasansafari/techblog";
+  static const String scienceBlogGithubUrl =
+      "https://github.com/AliReza-Fathi/Science-Blog";
   static const String viewHotestBlog = "مشاهده داغ ترین نوشته ها ";
   static const String viewHotestPodCasts = "مشاهده داغ ترین پادکست ها";
   static const String relatedArticle = "نوشته های مرتبط";
@@ -19,7 +19,10 @@ class MyStrings {
 ثبت نام کنی """;
   static const String shareText = """
 
-من از تکبلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
+من از ساینس بلاگ استفاده میکنم ، خیلی باحاله ، تو هم داشته باش\n
+""";
+  static const String aboutUs = """
+متن درباره ساینس بلاگ متن درباره ساینس بلاگ متن درباره ساینس بلاگ متن درباره ساینس بلاگ متن درباره ساینس بلاگ متن درباره ساینس بلاگ 
 """;
 
   static const String successfulRegistration = """

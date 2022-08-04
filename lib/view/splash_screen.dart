@@ -16,7 +16,7 @@ class _SplshScreenState extends State<SplshScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 3)).then((value) {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const MainScreen()));
+          MaterialPageRoute(builder: (context) => MainScreen()));
     });
     super.initState();
   }
