@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
+import 'package:scienceblog/view/article_List.dart';
+import 'package:scienceblog/view/management_Articles.dart';
 import 'package:scienceblog/view/splash_screen.dart';
 
 void main() {
-  runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: SolidColors.statusBarColor,
-    statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: SolidColors.systemNavigationBarColor,
-    systemNavigationBarIconBrightness: Brightness.dark,
-  ));
+      statusBarColor: SolidColors.statusBarColor,
+      statusBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: SolidColors.systemNavigationBarColor,
+      systemNavigationBarIconBrightness: Brightness.dark));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -93,6 +94,6 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             )),
-        home: const SplshScreen());
+        home: SplshScreen());
   }
 }

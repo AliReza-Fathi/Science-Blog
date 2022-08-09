@@ -1,4 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:get/get.dart';
+import 'package:scienceblog/controller/home_screen_controller.dart';
 import '../gen/assets.gen.dart';
 import '../models/fake_data.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
@@ -6,12 +10,14 @@ import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({
+  HomeScreen({
     Key? key,
     required this.size,
     required this.textTheme,
     required this.bodyMargin,
   }) : super(key: key);
+
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
 
   final Size size;
   final TextTheme textTheme;
@@ -21,109 +27,291 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
-        child: Column(
-          children: [
-            //پوستر صفحه اصلی
-            HomePagePoster(size: size, textTheme: textTheme),
+      child: Obx(
+        () => Padding(
+          padding: const EdgeInsets.fromLTRB(0, 16, 0, 0),
+          child: homeScreenController.loading == false
+              ? Column(
+                  children: [
+                    //پوستر صفحه اصلی
+                    poster(),
 
-            //فاصله بین پوستر و هشتگ ها
-            const SizedBox(
-              height: 16,
-            ),
+                    //فاصله بین پوستر و هشتگ ها
+                    const SizedBox(
+                      height: 16,
+                    ),
 
-            //ساخت هشتگ ها
-            HomePageTagList(bodyMargin: bodyMargin, textTheme: textTheme),
+                    //ساخت هشتگ ها
+                    HomePageTagList(
+                        bodyMargin: bodyMargin, textTheme: textTheme),
 
-            //فاصله سطر داغ ترین نوشته ها با لیست تگ ها
-            const SizedBox(
-              height: 16,
-            ),
-            //سطر مشاهده داغ ترین نوشته ها
-            HomePageHotestArticel(bodyMargin: bodyMargin, textTheme: textTheme),
+                    //فاصله سطر داغ ترین نوشته ها با لیست تگ ها
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    //سطر مشاهده داغ ترین نوشته ها
+                    HomePageHotestArticel(
+                        bodyMargin: bodyMargin, textTheme: textTheme),
 
-            //لیست داغ ترین نوشته ها
-            HomePageHotestArticleItem(size: size, textTheme: textTheme),
+                    //لیست داغ ترین نوشته ها
+                    hotBlogs(),
 
-            //فاصله لیست داغ ترین نوشته ها با داغ ترین پادکست ها
-            const SizedBox(
-              height: 16,
-            ),
+                    //فاصله لیست داغ ترین نوشته ها با داغ ترین پادکست ها
+                    const SizedBox(
+                      height: 16,
+                    ),
 
-            //سطر مشاهده داغ ترین پادکست ها
-            HomePageHotestPodcasts(
-                bodyMargin: bodyMargin, textTheme: textTheme),
+                    //سطر مشاهده داغ ترین پادکست ها
+                    HomePageHotestPodcasts(
+                        bodyMargin: bodyMargin, textTheme: textTheme),
 
-            //لیست داغ ترین پادکست ها
-            HomePageHotestPodcastsItem(size: size),
+                    //لیست داغ ترین پادکست ها
+                    hotPodcasts(),
 
-            //فاصله لیست داغ ترین پادکست ها با نویگیتور
-            const SizedBox(
-              height: 40,
-            )
-          ],
+                    //فاصله لیست داغ ترین پادکست ها با نویگیتور
+                    const SizedBox(
+                      height: 100,
+                    )
+                  ],
+                )
+              : const loading(),
         ),
       ),
     );
   }
-}
 
-class HomePageHotestPodcastsItem extends StatelessWidget {
-  const HomePageHotestPodcastsItem({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
-
-  final Size size;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget hotBlogs() {
     return SizedBox(
       height: size.height / 3.5,
-      child: ListView.builder(
-          itemCount: podcastList.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: ((context, index) {
-            //ساخت آیتم های لیست داغ ترین نوشته ها
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: size.height / 5.3,
-                    width: size.width / 2.8,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(16)),
-                            image: DecorationImage(
-                                image:
-                                    NetworkImage(podcastList[index].imageUrl),
-                                fit: BoxFit.cover),
+      child: Obx(
+        () => ListView.builder(
+            itemCount: homeScreenController.topVisitedList.length,
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: ((context, index) {
+              //ساخت آیتم های لیست داغ ترین نوشته ها
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                      height: size.height / 5.3,
+                      width: size.width / 2.8,
+                      child: Stack(
+                        children: [
+                          CachedNetworkImage(
+                            placeholder: ((context, url) => const loading()),
+                            errorWidget: (context, url, error) => const Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 50,
+                              color: SolidColors.primeryColor,
+                            ),
+                            imageUrl: homeScreenController
+                                .topVisitedList[index].image!,
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    const BorderRadius.all(Radius.circular(16)),
+                                image: DecorationImage(
+                                    image: imageProvider, fit: BoxFit.cover),
+                              ),
+                              foregroundDecoration: const BoxDecoration(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16)),
+                                  gradient: LinearGradient(
+                                      colors: GradiantColors.blogPost,
+                                      begin: Alignment.bottomCenter,
+                                      end: Alignment.topCenter)),
+                            ),
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            left: 0,
+                            right: 0,
+                            bottom: 8,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                Text(
+                                  homeScreenController
+                                      .topVisitedList[index].author!,
+                                  style: textTheme.subtitle1,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      homeScreenController
+                                          .topVisitedList[index].view!,
+                                      style: textTheme.subtitle1,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    const Icon(
+                                      Icons.remove_red_eye_sharp,
+                                      color: Colors.white,
+                                      size: 16,
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                //متن زیر باکس
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                  child: SizedBox(
-                      width: size.width / 2.8,
-                      child: Text(
-                        podcastList[index].title,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )),
-                ),
-              ],
-            );
-          })),
+                  //متن زیر باکس
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                    child: SizedBox(
+                        width: size.width / 2.8,
+                        child: Text(
+                          homeScreenController.topVisitedList[index].title!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        )),
+                  ),
+                ],
+              );
+            })),
+      ),
+    );
+  }
+
+  Widget hotPodcasts() {
+    return SizedBox(
+      height: size.height / 3.5,
+      child: Obx(
+        () => ListView.builder(
+            itemCount: homeScreenController.topPodcasts.length,
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            itemBuilder: ((context, index) {
+              //ساخت آیتم های لیست داغ ترین نوشته ها
+              return Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                        height: size.height / 5.3,
+                        width: size.width / 2.8,
+                        child: CachedNetworkImage(
+                          imageUrl:
+                              homeScreenController.topPodcasts[index].poster!,
+                          imageBuilder: ((context, imageProvider) => Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(16)),
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover)),
+                              )),
+                          placeholder: ((context, url) => const loading()),
+                          errorWidget: (context, url, error) => const Icon(
+                            Icons.image_not_supported_outlined,
+                            size: 50,
+                            color: SolidColors.primeryColor,
+                          ),
+                        )),
+                  ),
+                  //متن زیر باکس
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                    child: SizedBox(
+                        width: size.width / 2.8,
+                        child: Text(
+                          homeScreenController.topPodcasts[index].title!,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        )),
+                  ),
+                ],
+              );
+            })),
+      ),
+    );
+  }
+
+  Widget poster() {
+    return Stack(
+      children: [
+        //ساخت کانتینر پوستر
+        Container(
+          width: size.width / 1.15,
+          height: size.height / 4,
+          //محتوای پایینی استک عکس
+          child: CachedNetworkImage(
+            imageUrl: homeScreenController.poster.value.image!,
+            imageBuilder: ((context, imageProvider) => Container(
+                  decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                      image: DecorationImage(
+                          image: imageProvider, fit: BoxFit.cover)),
+                )),
+            placeholder: ((context, url) => loading()),
+            errorWidget: (context, url, error) => const Icon(
+              Icons.image_not_supported_outlined,
+              size: 50,
+              color: SolidColors.primeryColor,
+            ),
+          ),
+          //محتوای بالایی استک گرادینت
+          foregroundDecoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(16)),
+              //ساخت گرادینت
+              gradient: LinearGradient(
+                  colors: GradiantColors.homePosterCoverGradiant,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter)),
+        ),
+        //متن های روی پوستر
+        Positioned(
+          left: 0,
+          right: 0,
+          bottom: 8,
+          child: Column(
+            children: [
+              //سطر اول
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    homePagePosterMap["writer"] +
+                        " - " +
+                        homePagePosterMap["date"],
+                    style: textTheme.subtitle1,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        homePagePosterMap["view"],
+                        style: textTheme.subtitle1,
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      const Icon(
+                        Icons.remove_red_eye_sharp,
+                        color: Colors.white,
+                        size: 16,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+              //فاصله بین سطر اول و دوم
+              const SizedBox(
+                height: 10,
+              ),
+              //سطر دوم - موضوع نوشته
+              Text(
+                homeScreenController.poster.value.title!,
+                style: textTheme.headline1,
+              )
+            ],
+          ),
+        )
+      ],
     );
   }
 }
@@ -158,103 +346,6 @@ class HomePageHotestPodcasts extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class HomePageHotestArticleItem extends StatelessWidget {
-  const HomePageHotestArticleItem({
-    Key? key,
-    required this.size,
-    required this.textTheme,
-  }) : super(key: key);
-
-  final Size size;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: size.height / 3.5,
-      child: ListView.builder(
-          itemCount: blogList.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: ((context, index) {
-            //ساخت آیتم های لیست داغ ترین نوشته ها
-            return Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SizedBox(
-                    height: size.height / 5.3,
-                    width: size.width / 2.8,
-                    child: Stack(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                const BorderRadius.all(Radius.circular(16)),
-                            image: DecorationImage(
-                                image: NetworkImage(blogList[index].imageUrl),
-                                fit: BoxFit.cover),
-                          ),
-                          foregroundDecoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16)),
-                              gradient: LinearGradient(
-                                  colors: GradiantColors.blogPost,
-                                  begin: Alignment.bottomCenter,
-                                  end: Alignment.topCenter)),
-                        ),
-                        Positioned(
-                          left: 0,
-                          right: 0,
-                          bottom: 8,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Text(
-                                blogList[index].writer,
-                                style: textTheme.subtitle1,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    blogList[index].views,
-                                    style: textTheme.subtitle1,
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  const Icon(
-                                    Icons.remove_red_eye_sharp,
-                                    color: Colors.white,
-                                    size: 16,
-                                  )
-                                ],
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                //متن زیر باکس
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
-                  child: SizedBox(
-                      width: size.width / 2.8,
-                      child: Text(
-                        blogList[index].title,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )),
-                ),
-              ],
-            );
-          })),
     );
   }
 }
@@ -321,103 +412,6 @@ class HomePageTagList extends StatelessWidget {
               ),
             );
           })),
-    );
-  }
-}
-
-class HomePagePoster extends StatelessWidget {
-  const HomePagePoster({
-    Key? key,
-    required this.size,
-    required this.textTheme,
-  }) : super(key: key);
-
-  final Size size;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        //ساخت کانتینر پوستر
-        Container(
-          width: size.width / 1.15,
-          height: size.height / 4,
-          //محتوای پایینی استک عکس
-          decoration: BoxDecoration(
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-              image: DecorationImage(
-                  image: AssetImage(homePagePosterMap["imageAsset"]),
-                  fit: BoxFit.cover)),
-          //محتوای بالایی استک گرادینت
-          foregroundDecoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(16)),
-              //ساخت گرادینت
-              gradient: LinearGradient(
-                  colors: GradiantColors.homePosterCoverGradiant,
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter)),
-        ),
-        //متن های روی پوستر
-        TextOnPoster(textTheme: textTheme)
-      ],
-    );
-  }
-}
-
-class TextOnPoster extends StatelessWidget {
-  const TextOnPoster({
-    Key? key,
-    required this.textTheme,
-  }) : super(key: key);
-
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      left: 0,
-      right: 0,
-      bottom: 8,
-      child: Column(
-        children: [
-          //سطر اول
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                homePagePosterMap["writer"] + " - " + homePagePosterMap["date"],
-                style: textTheme.subtitle1,
-              ),
-              Row(
-                children: [
-                  Text(
-                    homePagePosterMap["view"],
-                    style: textTheme.subtitle1,
-                  ),
-                  const SizedBox(
-                    width: 5,
-                  ),
-                  const Icon(
-                    Icons.remove_red_eye_sharp,
-                    color: Colors.white,
-                    size: 16,
-                  )
-                ],
-              ),
-            ],
-          ),
-          //فاصله بین سطر اول و دوم
-          const SizedBox(
-            height: 10,
-          ),
-          //سطر دوم - موضوع نوشته
-          Text(
-            "دوازده قدم برنامه نویسی یک دوره ی...س",
-            style: textTheme.headline1,
-          )
-        ],
-      ),
     );
   }
 }

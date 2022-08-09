@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:scienceblog/view/main_screen.dart';
@@ -35,10 +36,7 @@ class _SplshScreenState extends State<SplshScreen> {
                   height: 180,
                 ),
                 const SizedBox(height: 30),
-                const SpinKitFadingCube(
-                  color: SolidColors.primeryColor,
-                  size: 32.0,
-                )
+                const loading()
               ],
             ),
           ),

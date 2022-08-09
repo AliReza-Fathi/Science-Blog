@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
-import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
-import 'package:scienceblog/view/main_screen.dart';
 
 class AboutUs extends StatelessWidget {
   RxInt selectedPageIndex = 0.obs;
