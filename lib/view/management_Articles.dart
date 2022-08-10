@@ -23,7 +23,7 @@ class ManagementOfArticles extends StatelessWidget {
               height: 16,
             ),
             Text(
-              MyStrings.managementArticles,
+              "MyStrings.managementArticles",
               style: textTheme.headline4,
               textAlign: TextAlign.center,
             ),

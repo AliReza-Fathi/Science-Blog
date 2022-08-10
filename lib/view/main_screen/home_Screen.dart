@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/controller/home_screen_controller.dart';
-import '../gen/assets.gen.dart';
-import '../models/fake_data.dart';
+import '../../gen/assets.gen.dart';
+import '../../models/fake_data.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
@@ -42,8 +42,7 @@ class HomeScreen extends StatelessWidget {
                     ),
 
                     //ساخت هشتگ ها
-                    HomePageTagList(
-                        bodyMargin: bodyMargin, textTheme: textTheme),
+                    tags(),
 
                     //فاصله سطر داغ ترین نوشته ها با لیست تگ ها
                     const SizedBox(
@@ -248,7 +247,7 @@ class HomeScreen extends StatelessWidget {
                       image: DecorationImage(
                           image: imageProvider, fit: BoxFit.cover)),
                 )),
-            placeholder: ((context, url) => loading()),
+            placeholder: ((context, url) => const loading()),
             errorWidget: (context, url, error) => const Icon(
               Icons.image_not_supported_outlined,
               size: 50,
@@ -272,46 +271,69 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               //سطر اول
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    homePagePosterMap["writer"] +
-                        " - " +
-                        homePagePosterMap["date"],
-                    style: textTheme.subtitle1,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        homePagePosterMap["view"],
-                        style: textTheme.subtitle1,
-                      ),
-                      const SizedBox(
-                        width: 5,
-                      ),
-                      const Icon(
-                        Icons.remove_red_eye_sharp,
-                        color: Colors.white,
-                        size: 16,
-                      )
-                    ],
-                  ),
-                ],
-              ),
-              //فاصله بین سطر اول و دوم
-              const SizedBox(
-                height: 10,
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     Text(
+              //       homePagePosterMap["writer"] +
+              //           " - " +
+              //           homePagePosterMap["date"],
+              //       style: textTheme.subtitle1,
+              //     ),
+              //     Row(
+              //       children: const [
+              //         // Text(
+              //         //   homePagePosterMap["view"],
+              //         //   style: textTheme.subtitle1,
+              //         // ),
+              //         SizedBox(
+              //           width: 5,
+              //         ),
+              //         Icon(
+              //           Icons.remove_red_eye_sharp,
+              //           color: Colors.white,
+              //           size: 16,
+              //         )
+              //       ],
+              //     ),
+              //   ],
+              // ),
+              // //فاصله بین سطر اول و دوم
+              // const SizedBox(
+              //   height: 10,
+              // ),
               //سطر دوم - موضوع نوشته
-              Text(
-                homeScreenController.poster.value.title!,
-                style: textTheme.headline1,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  homeScreenController.poster.value.title!,
+                  style: textTheme.headline1,
+                ),
               )
             ],
           ),
         )
       ],
+    );
+  }
+
+  Widget tags() {
+    return SizedBox(
+      height: 60,
+      child: ListView.builder(
+          itemCount: homeScreenController.tagsList.length,
+          scrollDirection: Axis.horizontal,
+          physics: const BouncingScrollPhysics(),
+          itemBuilder: ((context, index) {
+            return Padding(
+              padding: EdgeInsets.fromLTRB(
+                  0, 8, index == 0 ? (bodyMargin * 0.25) : 15, 8),
+              child: MainTags(
+                textTheme: textTheme,
+                index: index,
+              ),
+            );
+          })),
     );
   }
 }
@@ -380,38 +402,6 @@ class HomePageHotestArticel extends StatelessWidget {
           )
         ],
       ),
-    );
-  }
-}
-
-class HomePageTagList extends StatelessWidget {
-  const HomePageTagList({
-    Key? key,
-    required this.bodyMargin,
-    required this.textTheme,
-  }) : super(key: key);
-
-  final double bodyMargin;
-  final TextTheme textTheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 60,
-      child: ListView.builder(
-          itemCount: tagList.length,
-          scrollDirection: Axis.horizontal,
-          physics: const BouncingScrollPhysics(),
-          itemBuilder: ((context, index) {
-            return Padding(
-              padding: EdgeInsets.fromLTRB(
-                  0, 8, index == 0 ? (bodyMargin * 0.25) : 15, 8),
-              child: MainTags(
-                textTheme: textTheme,
-                index: index,
-              ),
-            );
-          })),
     );
   }
 }

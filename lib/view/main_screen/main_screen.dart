@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/view/about_Us.dart';
-import 'package:scienceblog/view/profile_Screen.dart';
+import 'package:scienceblog/view/my_cats.dart';
+import 'package:scienceblog/view/main_screen/profile_Screen.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:validators/validators.dart';
 import 'home_Screen.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -58,6 +61,7 @@ class MainScreen extends StatelessWidget {
           ),
         ),
 
+        //منو کشویی
         drawer: Drawer(
           backgroundColor: SolidColors.scafoldBg,
           child: Padding(
@@ -189,6 +193,7 @@ class BottemNavigatiotn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var textTheme = Theme.of(context).textTheme;
     return Positioned(
       left: 0,
       right: 0,
@@ -221,7 +226,9 @@ class BottemNavigatiotn extends StatelessWidget {
                       size: 30,
                     )),
                 IconButton(
-                    onPressed: (() {}),
+                    onPressed: (() {
+                      _newCreateBlog(context, size, textTheme);
+                    }),
                     icon: ImageIcon(
                       AssetImage(Assets.icons.write.path),
                       color: Colors.white,
@@ -240,5 +247,105 @@ class BottemNavigatiotn extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<dynamic> _newCreateBlog(
+      BuildContext context, Size size, TextTheme textTheme) {
+    return showModalBottomSheet(
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: ((context) {
+          return Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              height: 280,
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(30),
+                      topRight: Radius.circular(30))),
+              child: Column(
+                children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
+
+                  //آیکون ساینس بات و متن
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        Assets.images.sciensbot,
+                        height: 50,
+                      ),
+                      const SizedBox(
+                        width: 8,
+                      ),
+                      Text(
+                        MyStrings.newBlogTitleText,
+                        style: textTheme.headline4,
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(
+                    height: 25,
+                  ),
+                  //متن بدنه
+                  Text(
+                    MyStrings.newBlogBodyText,
+                    style: textTheme.headline5,
+                    textAlign: TextAlign.justify,
+                  ),
+
+                  const SizedBox(
+                    height: 50,
+                  ),
+
+                  //خط آیکون و متن
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      //مدیریت مقاله
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.icons.pencil,
+                            height: 40,
+                          ),
+                          const SizedBox(
+                            width: 18,
+                          ),
+                          Text(
+                            MyStrings.managmentArticle,
+                            style: textTheme.headline4,
+                          )
+                        ],
+                      ),
+
+                      //مدیریت پادکست
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            Assets.icons.microphon,
+                            height: 40,
+                          ),
+                          const SizedBox(
+                            width: 18,
+                          ),
+                          Text(
+                            MyStrings.managmentPodcast,
+                            style: textTheme.headline4,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        }));
   }
 }

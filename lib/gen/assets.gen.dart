@@ -40,6 +40,12 @@ class $AssetsIconsGen {
   /// File path: assets/icons/home.png
   AssetGenImage get home => const AssetGenImage('assets/icons/home.png');
 
+  /// File path: assets/icons/microphon.svg
+  String get microphon => 'assets/icons/microphon.svg';
+
+  /// File path: assets/icons/pencil.svg
+  String get pencil => 'assets/icons/pencil.svg';
+
   /// File path: assets/icons/user.png
   AssetGenImage get user => const AssetGenImage('assets/icons/user.png');
 
@@ -52,9 +58,6 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/Logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/Logo.png');
-
-  /// File path: assets/images/Main Screen.svg
-  String get mainScreen => 'assets/images/Main Screen.svg';
 
   /// File path: assets/images/MainScreenLogo.png
   AssetGenImage get mainScreenLogo =>

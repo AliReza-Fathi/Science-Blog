@@ -1,4 +1,5 @@
 import 'package:scienceblog/gen/assets.gen.dart';
+import 'package:scienceblog/models/tags_model.dart';
 import 'data_models.dart';
 
 Map homePagePosterMap = {
@@ -29,7 +30,7 @@ List<HashTagModel> tagList = [
   HashTagModel(title: "گل و گیاه"),
 ];
 
-List<HashTagModel> selectedTags = [];
+List<TagsModel> selectedTags = [];
 
 List<BlogModel> blogList = [
   BlogModel(

@@ -2,13 +2,14 @@ import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/api_constant.dart';
 import 'package:scienceblog/models/article_model.dart';
 import 'package:scienceblog/models/poster_model.dart';
+import 'package:scienceblog/models/tags_model.dart';
 import 'package:scienceblog/services/dio_service.dart';
 
 import '../models/podcast_model.dart';
 
 class HomeScreenController extends GetxController {
   Rx<PosterModel> poster = PosterModel().obs;
-  RxList tagsList = RxList();
+  RxList<TagsModel> tagsList = RxList();
   RxList<ArticleModel> topVisitedList = RxList();
   RxList<PodcastModel> topPodcasts = RxList();
   RxBool loading = false.obs;
@@ -29,6 +30,9 @@ class HomeScreenController extends GetxController {
       });
       response.data['top_podcasts'].forEach((element) {
         topPodcasts.add(PodcastModel.fromJson(element));
+      });
+      response.data['tags'].forEach((element) {
+        tagsList.add(TagsModel.fromJson(element));
       });
       poster.value = PosterModel.fromJson(response.data['poster']);
       loading.value = false;

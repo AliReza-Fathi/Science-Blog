@@ -49,6 +49,7 @@ class RegisterIntro extends StatelessWidget {
     ));
   }
 
+//باکس وارد کردن ایمیل
   Future<dynamic> _showEmailBottemSheet(
       BuildContext context, Size size, TextTheme textTheme) {
     return showModalBottomSheet(
@@ -60,7 +61,7 @@ class RegisterIntro extends StatelessWidget {
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
-              height: size.height / 2,
+              height: size.height / 3.2,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -101,6 +102,7 @@ class RegisterIntro extends StatelessWidget {
         }));
   }
 
+//باکس وارد کردن کد تایید
   Future<dynamic> _activateCodeBottemSheet(
       BuildContext context, Size size, TextTheme textTheme) {
     return showModalBottomSheet(
@@ -112,7 +114,7 @@ class RegisterIntro extends StatelessWidget {
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
-              height: size.height / 2,
+              height: size.height / 3.2,
               decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -142,7 +144,7 @@ class RegisterIntro extends StatelessWidget {
                         onPressed: (() {
                           Navigator.of(context).pushReplacement(
                               MaterialPageRoute(
-                                  builder: ((context) => const MyCats())));
+                                  builder: ((context) => MyCats())));
                         }),
                         child: const Text("ادامه"))
                   ],

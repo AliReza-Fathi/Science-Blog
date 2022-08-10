@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
-import 'package:scienceblog/view/article_List.dart';
-import 'package:scienceblog/view/management_Articles.dart';
+import 'package:scienceblog/controller/podcast_controller.dart';
+import 'package:scienceblog/view/article_list_screen.dart';
+import 'package:scienceblog/view/main_screen/profile_Screen.dart';
+import 'package:scienceblog/view/podcast_list_screen.dart';
+import 'package:scienceblog/view/register_intro.dart';
 import 'package:scienceblog/view/splash_screen.dart';
 
 void main() {
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: const [
-          Locale('fa', ''),
+          Locale('fa', 'IR'),
         ],
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
@@ -87,13 +91,13 @@ class MyApp extends StatelessWidget {
                   fontFamily: 'dana',
                   fontSize: 14,
                   fontWeight: FontWeight.w300,
-                  color: SolidColors.posterSubTitle),
+                  color: SolidColors.subText),
               bodyText1: TextStyle(
                 fontFamily: 'dana',
                 fontSize: 13,
                 fontWeight: FontWeight.w300,
               ),
             )),
-        home: SplshScreen());
+        home: RegisterIntro());
   }
 }

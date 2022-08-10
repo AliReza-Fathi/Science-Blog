@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
-import '../gen/assets.gen.dart';
+import 'package:scienceblog/gen/assets.gen.dart';
+import '../../gen/assets.gen.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
 

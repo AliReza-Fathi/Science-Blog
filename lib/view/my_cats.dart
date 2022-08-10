@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:scienceblog/controller/home_screen_controller.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/models/fake_data.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
@@ -8,13 +11,14 @@ import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 
 class MyCats extends StatefulWidget {
-  const MyCats({Key? key}) : super(key: key);
+  MyCats({Key? key}) : super(key: key);
 
   @override
   State<MyCats> createState() => _MyCatsState();
 }
 
 class _MyCatsState extends State<MyCats> {
+  HomeScreenController homeScreenController = Get.put(HomeScreenController());
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -70,7 +74,7 @@ class _MyCatsState extends State<MyCats> {
                   height: 100,
                   child: GridView.builder(
                       physics: const ClampingScrollPhysics(),
-                      itemCount: tagList.length,
+                      itemCount: homeScreenController.tagsList.length,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
                       gridDelegate:
@@ -84,8 +88,10 @@ class _MyCatsState extends State<MyCats> {
                         return InkWell(
                             onTap: (() {
                               setState(() {
-                                if (!selectedTags.contains(tagList[index])) {
-                                  selectedTags.add(tagList[index]);
+                                if (!selectedTags.contains(
+                                    homeScreenController.tagsList[index])) {
+                                  selectedTags.add(
+                                      homeScreenController.tagsList[index]);
                                 } else
                                   print(
                                       "${tagList[index].title} در لیست موارد دلخواه وجود دارد");
@@ -137,7 +143,7 @@ class _MyCatsState extends State<MyCats> {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    selectedTags[index].title,
+                                    selectedTags[index].title!,
                                     style: textTheme.headline4,
                                   ),
                                   InkWell(

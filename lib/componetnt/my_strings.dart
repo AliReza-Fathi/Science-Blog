@@ -8,8 +8,12 @@ class MyStrings {
   static const String submitPodcasts = "ارسال پادکست";
   static const String imageProfileEdit = "ویرایش عکس پروفایل";
   static const String myFavBlog = "مقالات مورد علاقه من";
+  static const String managmentArticle = "مدیریت مقاله ها";
+  static const String managmentPodcast = "مدیریت پادکست ها";
   static const String myFavPodcast = "پادکست های مورد علاقه من";
   static const String logOut = "خروج از حساب کاربری";
+  static const String newBlogTitleText =
+      "دونسته هات رو با بقیه به اشتراک بزار ...";
   static const String insertYourEmail = "لطفا ایمیلت رو وارد کن";
   static const String activateCode = "کد فعال سازی رو وارد کن ";
   static const String chooseCats = "دسته بندی هایی که دوست داری رو انتخاب کن";
@@ -30,8 +34,7 @@ class MyStrings {
 لطفا اطلاعات ثبت نام رو کامل کن
 """;
 
-  static const String managementArticles =
-      """هنوز هیچ مقاله یا پادکستی اضافه نکردی!
-برای ارسال مقاله یا پادکست دکمه پایین رو بزن
-""";
+  static const String newBlogBodyText =
+      """فکر کن! اینجا بودنت به این معناست که یک گیک تکنولوژی هستی
+دونسته هات رو با جامعه‌ گیک های فارسی زبان به اشتراک بذار...""";
 }
