@@ -2,16 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:scienceblog/controller/home_screen_controller.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/models/fake_data.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
+import 'package:scienceblog/view/main_screen/home_Screen.dart';
+import 'package:scienceblog/view/main_screen/main_screen.dart';
 
 class MyCats extends StatefulWidget {
-  MyCats({Key? key}) : super(key: key);
+  const MyCats({Key? key}) : super(key: key);
 
   @override
   State<MyCats> createState() => _MyCatsState();
@@ -73,7 +74,7 @@ class _MyCatsState extends State<MyCats> {
                   width: double.infinity,
                   height: 100,
                   child: GridView.builder(
-                      physics: const ClampingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: homeScreenController.tagsList.length,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -92,9 +93,10 @@ class _MyCatsState extends State<MyCats> {
                                     homeScreenController.tagsList[index])) {
                                   selectedTags.add(
                                       homeScreenController.tagsList[index]);
-                                } else
+                                } else {
                                   print(
                                       "${tagList[index].title} در لیست موارد دلخواه وجود دارد");
+                                }
                               });
                             }),
                             child:
@@ -117,7 +119,7 @@ class _MyCatsState extends State<MyCats> {
                   width: double.infinity,
                   height: 100,
                   child: GridView.builder(
-                      physics: const ClampingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       itemCount: selectedTags.length,
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
@@ -162,6 +164,20 @@ class _MyCatsState extends State<MyCats> {
                               ),
                             ));
                       })),
+                ),
+              ),
+
+              const SizedBox(
+                height: 40,
+              ),
+
+              ElevatedButton(
+                onPressed: (() {
+                  Get.to(MainScreen());
+                }),
+                child: Text(
+                  "پایان ثبت نام",
+                  style: textTheme.headline1,
                 ),
               ),
             ],

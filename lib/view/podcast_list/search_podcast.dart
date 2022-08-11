@@ -1,47 +1,50 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/controller/article_controller.dart';
-import 'package:scienceblog/componetnt/my_Component.dart';
-import 'package:scienceblog/componetnt/text_style.dart';
-import 'package:scienceblog/controller/article_controller.dart';
 
-class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({Key? key}) : super(key: key);
+class PodcastListScreenWhitSearch extends StatelessWidget {
+  PodcastListScreenWhitSearch({Key? key}) : super(key: key);
   ArcticleController arcticleController = Get.put(ArcticleController());
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
+    var size = MediaQuery.of(context).size;
+    double bodyMargin = size.width / 10;
 
     return SafeArea(
         child: Scaffold(
-      appBar: appBar("مقالات جدید"),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Container(
-                child: TextField(
-                  autofocus: true,
-                  //decoration: ,
-                ),
-              )
-            ],
-          ),
-          articleList(
-              arcticleController: arcticleController, textTheme: textTheme),
-        ],
-      ),
-    ));
+            appBar: appBar("لیست پادکست ها"),
+            body: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: SafeArea(
+                  child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(bodyMargin, 0, bodyMargin, 0),
+                    child: TextField(
+                      onChanged: ((value) {
+                        //isEmail(value);
+                      }),
+                      style: textTheme.headline5,
+                      textAlign: TextAlign.start,
+                      decoration: InputDecoration(
+                          hintText: "جستجو", hintStyle: textTheme.headline5),
+                    ),
+                  ),
+                  ArticleList(
+                      arcticleController: arcticleController,
+                      textTheme: textTheme),
+                ],
+              )),
+            )));
   }
 }
 
-class articleList extends StatelessWidget {
-  const articleList({
+class ArticleList extends StatelessWidget {
+  const ArticleList({
     Key? key,
     required this.arcticleController,
     required this.textTheme,
@@ -57,6 +60,8 @@ class articleList extends StatelessWidget {
       child: SizedBox(
         child: Obx(
           () => ListView.builder(
+              shrinkWrap: true,
+              physics: const BouncingScrollPhysics(),
               scrollDirection: Axis.vertical,
               itemCount: arcticleController.articleList.length,
               itemBuilder: ((context, index) {
@@ -81,7 +86,7 @@ class articleList extends StatelessWidget {
                             );
                           })),
                           placeholder: (((context, url) {
-                            return const loading();
+                            return const Loading();
                           })),
                           errorWidget: ((context, url, error) {
                             return const Icon(
@@ -102,28 +107,17 @@ class articleList extends StatelessWidget {
                             child: Text(
                               arcticleController.articleList[index].title!,
                               overflow: TextOverflow.ellipsis,
+                              style: textTheme.headline4,
                               maxLines: 2,
                             ),
                           ),
                           const SizedBox(
                             height: 16,
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                arcticleController.articleList[index].author!,
-                                style: textTheme.caption,
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Text(
-                                arcticleController.articleList[index].view! +
-                                    " بازدید ",
-                                style: textTheme.caption,
-                              ),
-                            ],
+                          Text(
+                            arcticleController.articleList[index].author!,
+                            style: textTheme.subtitle2,
+                            textAlign: TextAlign.right,
                           )
                         ],
                       )

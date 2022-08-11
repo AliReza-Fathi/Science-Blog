@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:scienceblog/view/main_screen/main_screen.dart';
-import 'package:scienceblog/componetnt/my_colors.dart';
 
 class SplshScreen extends StatefulWidget {
   const SplshScreen({Key? key}) : super(key: key);
@@ -36,7 +34,7 @@ class _SplshScreenState extends State<SplshScreen> {
                   height: 180,
                 ),
                 const SizedBox(height: 30),
-                const loading()
+                const Loading()
               ],
             ),
           ),

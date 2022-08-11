@@ -1,17 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/controller/article_controller.dart';
-import 'package:scienceblog/componetnt/my_Component.dart';
-import 'package:scienceblog/componetnt/text_style.dart';
-import 'package:scienceblog/controller/article_controller.dart';
 
-class PodcastListScreen extends StatelessWidget {
-  PodcastListScreen({Key? key}) : super(key: key);
+class PodcastFavoriteListScreen extends StatelessWidget {
+  PodcastFavoriteListScreen({Key? key}) : super(key: key);
   ArcticleController arcticleController = Get.put(ArcticleController());
   @override
   Widget build(BuildContext context) {
@@ -19,7 +14,7 @@ class PodcastListScreen extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-      appBar: appBar("پادکست های جدید"),
+      appBar: appBar("پادکست های مورد علاقه"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
@@ -50,7 +45,7 @@ class PodcastListScreen extends StatelessWidget {
                               );
                             })),
                             placeholder: (((context, url) {
-                              return const loading();
+                              return const Loading();
                             })),
                             errorWidget: ((context, url, error) {
                               return const Icon(
@@ -71,28 +66,20 @@ class PodcastListScreen extends StatelessWidget {
                               child: Text(
                                 arcticleController.articleList[index].title!,
                                 overflow: TextOverflow.ellipsis,
+                                style: textTheme.headline4,
+                                textAlign: TextAlign.justify,
                                 maxLines: 2,
                               ),
                             ),
                             const SizedBox(
                               height: 16,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  arcticleController.articleList[index].author!,
-                                  style: textTheme.caption,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  arcticleController.articleList[index].view! +
-                                      " بازدید ",
-                                  style: textTheme.caption,
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 132),
+                              child: Text(
+                                arcticleController.articleList[index].author!,
+                                style: textTheme.subtitle2,
+                              ),
                             )
                           ],
                         )

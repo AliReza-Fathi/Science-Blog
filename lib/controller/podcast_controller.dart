@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/api_constant.dart';
-import 'package:scienceblog/models/article_model.dart';
 import 'package:scienceblog/models/podcast_model.dart';
 import 'package:scienceblog/services/dio_service.dart';
 

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
-import 'package:scienceblog/view/about_Us.dart';
-import 'package:scienceblog/view/my_cats.dart';
-import 'package:scienceblog/view/main_screen/profile_Screen.dart';
+import 'package:scienceblog/view/article_list/article_list_screen.dart';
+import 'package:scienceblog/view/drawer/about_Us.dart';
+import 'package:scienceblog/view/article_list/article_list_screen_whit_search.dart';
+import 'package:scienceblog/view/profile_screen/profile_Screen.dart';
+import 'package:scienceblog/view/podcast_list/podcast_list_screen.dart';
+import 'package:scienceblog/view/podcast_list/search_podcast.dart';
+import 'package:scienceblog/view/register_user/register_intro.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:validators/validators.dart';
 import 'home_Screen.dart';
 
 final GlobalKey<ScaffoldState> _key = GlobalKey();
@@ -83,14 +85,10 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfileScreen(
-                            size: size,
-                            textTheme: textTheme,
-                            bodyMargin: bodyMargin)),
-                  );
+                  Get.to(ProfileScreen(
+                      size: size,
+                      textTheme: textTheme,
+                      bodyMargin: bodyMargin));
                 },
               ),
               const Divider(
@@ -105,10 +103,52 @@ class MainScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => AboutUs()),
-                  );
+                  Get.to(AboutUs());
+                },
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+              ListTile(
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "ثبت نام",
+                    style: textTheme.headline4,
+                  ),
+                ),
+                onTap: () {
+                  Get.to(RegisterIntro());
+                },
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+              ListTile(
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "لیست مقالات",
+                    style: textTheme.headline4,
+                  ),
+                ),
+                onTap: () {
+                  Get.to(ArticleListScreen());
+                },
+              ),
+              const Divider(
+                color: SolidColors.dividerColor,
+              ),
+              ListTile(
+                title: InkWell(
+                  splashColor: SolidColors.primeryColor,
+                  child: Text(
+                    "لیست پادکست ها",
+                    style: textTheme.headline4,
+                  ),
+                ),
+                onTap: () {
+                  Get.to(PodcastListScreen());
                 },
               ),
               const Divider(
@@ -124,21 +164,6 @@ class MainScreen extends StatelessWidget {
                 ),
                 onTap: () async {
                   await Share.share(MyStrings.shareText);
-                },
-              ),
-              const Divider(
-                color: SolidColors.dividerColor,
-              ),
-              ListTile(
-                title: InkWell(
-                  splashColor: SolidColors.primeryColor,
-                  child: Text(
-                    "ساینس بلاگ در گیت هاب",
-                    style: textTheme.headline4,
-                  ),
-                ),
-                onTap: () {
-                  myLaunchUrl(MyStrings.scienceBlogGithubUrl);
                 },
               ),
               const Divider(

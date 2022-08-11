@@ -3,12 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
-import 'package:scienceblog/controller/podcast_controller.dart';
-import 'package:scienceblog/view/article_list_screen.dart';
-import 'package:scienceblog/view/main_screen/profile_Screen.dart';
-import 'package:scienceblog/view/podcast_list_screen.dart';
-import 'package:scienceblog/view/register_intro.dart';
-import 'package:scienceblog/view/splash_screen.dart';
+import 'package:scienceblog/view/article_management/list_of_my_articles.dart';
+import 'package:scienceblog/view/article_management/management_Articles.dart';
+import 'package:scienceblog/view/register_user/register_intro.dart';
+import 'package:scienceblog/view/register_user/select_category.dart';
+import 'package:scienceblog/view/splash_screen/splash_screen.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -26,16 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var textTheme = Theme.of(context).textTheme;
-    return MaterialApp(
+    return GetMaterialApp(
+        locale: const Locale('fa', 'IR'),
         title: 'Science Blog',
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        supportedLocales: const [
-          Locale('fa', 'IR'),
-        ],
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             fontFamily: 'dana',
@@ -98,6 +90,6 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             )),
-        home: RegisterIntro());
+        home: SplshScreen());
   }
 }

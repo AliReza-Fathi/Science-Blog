@@ -1,10 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/controller/home_screen_controller.dart';
 import '../../gen/assets.gen.dart';
-import '../../models/fake_data.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_strings.dart';
@@ -73,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                     )
                   ],
                 )
-              : const loading(),
+              : const Loading(),
         ),
       ),
     );
@@ -99,7 +97,7 @@ class HomeScreen extends StatelessWidget {
                       child: Stack(
                         children: [
                           CachedNetworkImage(
-                            placeholder: ((context, url) => const loading()),
+                            placeholder: ((context, url) => const Loading()),
                             errorWidget: (context, url, error) => const Icon(
                               Icons.image_not_supported_outlined,
                               size: 50,
@@ -205,7 +203,7 @@ class HomeScreen extends StatelessWidget {
                                         image: imageProvider,
                                         fit: BoxFit.cover)),
                               )),
-                          placeholder: ((context, url) => const loading()),
+                          placeholder: ((context, url) => const Loading()),
                           errorWidget: (context, url, error) => const Icon(
                             Icons.image_not_supported_outlined,
                             size: 50,
@@ -247,7 +245,7 @@ class HomeScreen extends StatelessWidget {
                       image: DecorationImage(
                           image: imageProvider, fit: BoxFit.cover)),
                 )),
-            placeholder: ((context, url) => const loading()),
+            placeholder: ((context, url) => const Loading()),
             errorWidget: (context, url, error) => const Icon(
               Icons.image_not_supported_outlined,
               size: 50,

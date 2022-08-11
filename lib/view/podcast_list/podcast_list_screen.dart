@@ -1,17 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:scienceblog/componetnt/my_Component.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
 import 'package:scienceblog/controller/article_controller.dart';
-import 'package:scienceblog/componetnt/my_Component.dart';
-import 'package:scienceblog/componetnt/text_style.dart';
-import 'package:scienceblog/controller/article_controller.dart';
 
-class ArticleListScreen extends StatelessWidget {
-  ArticleListScreen({Key? key}) : super(key: key);
+class PodcastListScreen extends StatelessWidget {
+  PodcastListScreen({Key? key}) : super(key: key);
   ArcticleController arcticleController = Get.put(ArcticleController());
   @override
   Widget build(BuildContext context) {
@@ -19,12 +14,13 @@ class ArticleListScreen extends StatelessWidget {
 
     return SafeArea(
         child: Scaffold(
-      appBar: appBar("مقالات جدید"),
+      appBar: appBar("پادکست های جدید"),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: SizedBox(
           child: Obx(
             () => ListView.builder(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: arcticleController.articleList.length,
                 itemBuilder: ((context, index) {
@@ -50,7 +46,7 @@ class ArticleListScreen extends StatelessWidget {
                               );
                             })),
                             placeholder: (((context, url) {
-                              return const loading();
+                              return const Loading();
                             })),
                             errorWidget: ((context, url, error) {
                               return const Icon(
@@ -71,28 +67,20 @@ class ArticleListScreen extends StatelessWidget {
                               child: Text(
                                 arcticleController.articleList[index].title!,
                                 overflow: TextOverflow.ellipsis,
+                                style: textTheme.headline4,
                                 maxLines: 2,
+                                textAlign: TextAlign.justify,
                               ),
                             ),
                             const SizedBox(
                               height: 16,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  arcticleController.articleList[index].author!,
-                                  style: textTheme.caption,
-                                ),
-                                const SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  arcticleController.articleList[index].view! +
-                                      " بازدید ",
-                                  style: textTheme.caption,
-                                ),
-                              ],
+                            Padding(
+                              padding: const EdgeInsets.only(left: 132),
+                              child: Text(
+                                arcticleController.articleList[index].author!,
+                                style: textTheme.subtitle2,
+                              ),
                             )
                           ],
                         )

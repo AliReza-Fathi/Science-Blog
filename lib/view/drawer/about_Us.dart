@@ -15,6 +15,7 @@ class AboutUs extends StatelessWidget {
     double bodyMargin = size.width / 10;
     return SafeArea(
         child: Scaffold(
+      appBar: appBar("درباره ساینس بلاگ"),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
