@@ -39,6 +39,9 @@ class AboutUs extends StatelessWidget {
                 style: textTheme.headline4,
               ),
             ),
+            const SizedBox(
+              height: 20,
+            ),
             SciDivider(size: size),
           ],
         ),

@@ -268,39 +268,6 @@ class HomeScreen extends StatelessWidget {
           bottom: 8,
           child: Column(
             children: [
-              //سطر اول
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   children: [
-              //     Text(
-              //       homePagePosterMap["writer"] +
-              //           " - " +
-              //           homePagePosterMap["date"],
-              //       style: textTheme.subtitle1,
-              //     ),
-              //     Row(
-              //       children: const [
-              //         // Text(
-              //         //   homePagePosterMap["view"],
-              //         //   style: textTheme.subtitle1,
-              //         // ),
-              //         SizedBox(
-              //           width: 5,
-              //         ),
-              //         Icon(
-              //           Icons.remove_red_eye_sharp,
-              //           color: Colors.white,
-              //           size: 16,
-              //         )
-              //       ],
-              //     ),
-              //   ],
-              // ),
-              // //فاصله بین سطر اول و دوم
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              //سطر دوم - موضوع نوشته
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(

@@ -72,6 +72,10 @@ class $AssetsImagesGen {
 
   /// File path: assets/images/sciensbot.svg
   String get sciensbot => 'assets/images/sciensbot.svg';
+
+  /// File path: assets/images/single_place_holder.jpg
+  AssetGenImage get singlePlaceHolder =>
+      const AssetGenImage('assets/images/single_place_holder.jpg');
 }
 
 class Assets {

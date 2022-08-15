@@ -7,6 +7,7 @@ import 'package:scienceblog/view/article_management/list_of_my_articles.dart';
 import 'package:scienceblog/view/article_management/management_Articles.dart';
 import 'package:scienceblog/view/register_user/register_intro.dart';
 import 'package:scienceblog/view/register_user/select_category.dart';
+import 'package:scienceblog/view/single/single.dart';
 import 'package:scienceblog/view/splash_screen/splash_screen.dart';
 
 void main() {
@@ -90,6 +91,6 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             )),
-        home: SplshScreen());
+        home: Single());
   }
 }
