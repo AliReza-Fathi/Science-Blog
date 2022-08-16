@@ -91,6 +91,6 @@ class MyApp extends StatelessWidget {
                 fontWeight: FontWeight.w300,
               ),
             )),
-        home: Single());
+        home: SplshScreen());
   }
 }
