@@ -87,7 +87,7 @@ class MyApp extends StatelessWidget {
                   color: SolidColors.subText),
               bodyText1: TextStyle(
                 fontFamily: 'dana',
-                fontSize: 13,
+                fontSize: 16,
                 fontWeight: FontWeight.w300,
               ),
             )),

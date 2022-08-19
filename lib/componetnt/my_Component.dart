@@ -9,6 +9,7 @@ import 'package:scienceblog/controller/article_controller.dart';
 import 'package:scienceblog/controller/home_screen_controller.dart';
 import 'package:scienceblog/gen/assets.gen.dart';
 import 'package:scienceblog/componetnt/my_colors.dart';
+import 'package:scienceblog/view/single/single.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SciDivider extends StatelessWidget {
@@ -145,95 +146,102 @@ class ArticleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        child: Obx(
-          () => ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: arcticleController.articleList.length,
-              itemBuilder: ((context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: Get.height / 6,
-                        width: Get.width / 3,
-                        child: CachedNetworkImage(
-                          imageUrl:
-                              arcticleController.articleList[index].image!,
-                          imageBuilder: (((context, imageProvider) {
-                            return Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(16)),
-                                  image: DecorationImage(
-                                      image: imageProvider, fit: BoxFit.cover)),
-                            );
-                          })),
-                          placeholder: (((context, url) {
-                            return const Loading();
-                          })),
-                          errorWidget: ((context, url, error) {
-                            return const Icon(
-                                Icons.image_not_supported_outlined,
-                                size: 50,
-                                color: SolidColors.primeryColor);
-                          }),
+    return InkWell(
+      onTap: () {
+        Get.to(Single());
+      },
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: SizedBox(
+          child: Obx(
+            () => ListView.builder(
+                shrinkWrap: true,
+                physics: const BouncingScrollPhysics(),
+                scrollDirection: Axis.vertical,
+                itemCount: arcticleController.articleList.length,
+                itemBuilder: ((context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          height: Get.height / 6,
+                          width: Get.width / 3,
+                          child: CachedNetworkImage(
+                            imageUrl:
+                                arcticleController.articleList[index].image!,
+                            imageBuilder: (((context, imageProvider) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(16)),
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover)),
+                              );
+                            })),
+                            placeholder: (((context, url) {
+                              return const Loading();
+                            })),
+                            errorWidget: ((context, url, error) {
+                              return const Icon(
+                                  Icons.image_not_supported_outlined,
+                                  size: 50,
+                                  color: SolidColors.primeryColor);
+                            }),
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            width: Get.width / 2,
-                            child: Text(
-                              arcticleController.articleList[index].title!,
-                              overflow: TextOverflow.ellipsis,
-                              style: textTheme.headline4,
-                              textAlign: TextAlign.justify,
-                              maxLines: 2,
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: Get.width / 2,
+                              child: Text(
+                                arcticleController.articleList[index].title!,
+                                overflow: TextOverflow.ellipsis,
+                                style: textTheme.headline4,
+                                textAlign: TextAlign.justify,
+                                maxLines: 2,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 16,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                arcticleController.articleList[index].author!,
-                                style: textTheme.subtitle2,
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                "${arcticleController.articleList[index].view!} بازدید ",
-                                style: textTheme.subtitle2,
-                              ),
-                              const SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                arcticleController.articleList[index].catName!,
-                                style: textTheme.headline3,
-                              ),
-                            ],
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              })),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  arcticleController.articleList[index].author!,
+                                  style: textTheme.subtitle2,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  "${arcticleController.articleList[index].view!} بازدید ",
+                                  style: textTheme.subtitle2,
+                                ),
+                                const SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  arcticleController
+                                      .articleList[index].catName!,
+                                  style: textTheme.headline3,
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                })),
+          ),
         ),
       ),
     );
